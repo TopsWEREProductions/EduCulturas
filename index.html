@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCulturas25 - Plataforma Educacional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">EduCulturas25</div>
+            <ul class="nav-links">
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#conversoes">Conversões</a></li>
+                <li><a href="#max">Max IA</a></li>
+                <li><a href="#ferramentas">Ferramentas</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#apresentacoes">Apresentações</a></li>
+                <li><a href="#creditos">Créditos</a></li>
+                <li><a href="#" id="loginBtn" class="auth-btn">Iniciar Sessão</a></li>
+                <li><a href="#" id="settingsBtn"><i class="fas fa-cog"></i></a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modais de Autenticação -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Iniciar Sessão</h2>
+            <form id="loginForm">
+                <input type="email" placeholder="E-mail" required>
+                <input type="password" placeholder="Palavra-passe" required>
+                <button type="submit">Entrar</button>
+                <div class="social-login">
+                    <button type="button" class="google-login">
+                        <i class="fab fa-google"></i> Entrar com Google
+                    </button>
+                    <button type="button" class="facebook-login">
+                        <i class="fab fa-facebook"></i> Entrar com Facebook
+                    </button>
+                </div>
+                <p>Não tem uma conta? <a href="#" id="showRegister">Registar</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Criar Conta</h2>
+            <form id="registerForm">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="E-mail" required>
+                <input type="password" placeholder="Palavra-passe" required>
+                <input type="password" placeholder="Confirmar palavra-passe" required>
+                <button type="submit">Registar</button>
+                <div class="social-login">
+                    <button type="button" class="google-login">
+                        <i class="fab fa-google"></i> Registar com Google
+                    </button>
+                    <button type="button" class="facebook-login">
+                        <i class="fab fa-facebook"></i> Registar com Facebook
+                    </button>
+                </div>
+                <p>Já tem uma conta? <a href="#" id="showLogin">Iniciar Sessão</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Configurações -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Configurações</h2>
+            <div class="settings-section">
+                <h3>Tema</h3>
+                <div class="theme-options">
+                    <button class="theme-btn" data-theme="light">Claro</button>
+                    <button class="theme-btn" data-theme="dark">Escuro</button>
+                    <button class="theme-btn" data-theme="deep-blue">Deep Blue</button>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>Idioma</h3>
+                <select id="languageSelect">
+                    <option value="pt-PT">Português (Portugal)</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section id="hero" class="hero">
+            <h1>Bem-vindo ao EduCulturas25</h1>
+            <p>A sua plataforma completa de aprendizagem e ferramentas educacionais</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Pesquisar recursos, ferramentas, apresentações...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </section>
+
+        <section id="quick-tools" class="section">
+            <div class="quick-tools-grid">
+                <div class="quick-tool">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Calculadora</h3>
+                    <div class="calculator">
+                        <input type="text" id="calc-display" readonly>
+                        <div class="calc-buttons">
+                            <button onclick="appendToCalc('7')">7</button>
+                            <button onclick="appendToCalc('8')">8</button>
+                            <button onclick="appendToCalc('9')">9</button>
+                            <button onclick="appendToCalc('+')" class="operator">+</button>
+                            <button onclick="appendToCalc('4')">4</button>
+                            <button onclick="appendToCalc('5')">5</button>
+                            <button onclick="appendToCalc('6')">6</button>
+                            <button onclick="appendToCalc('-')" class="operator">-</button>
+                            <button onclick="appendToCalc('1')">1</button>
+                            <button onclick="appendToCalc('2')">2</button>
+                            <button onclick="appendToCalc('3')">3</button>
+                            <button onclick="appendToCalc('*')" class="operator">×</button>
+                            <button onclick="appendToCalc('0')">0</button>
+                            <button onclick="appendToCalc('.')" class="decimal">.</button>
+                            <button onclick="calculateResult()" class="equals">=</button>
+                            <button onclick="appendToCalc('/')" class="operator">÷</button>
+                            <button onclick="clearCalc()" class="clear" style="grid-column: span 2;">C</button>
+                            <button onclick="backspace()" style="grid-column: span 2;"><i class="fas fa-backspace"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-tool">
+                    <i class="fas fa-clock"></i>
+                    <h3>Temporizador</h3>
+                    <div class="timer">
+                        <div class="timer-display">
+                            <span id="minutes">25</span>:<span id="seconds">00</span>
+                        </div>
+                        <div class="timer-controls">
+                            <button onclick="startTimer()" id="start-timer"><i class="fas fa-play"></i></button>
+                            <button onclick="pauseTimer()" id="pause-timer"><i class="fas fa-pause"></i></button>
+                            <button onclick="resetTimer()" id="reset-timer"><i class="fas fa-redo"></i></button>
+                        </div>
+                        <div class="timer-presets">
+                            <button onclick="setTimer(15)">15min</button>
+                            <button onclick="setTimer(25)">25min</button>
+                            <button onclick="setTimer(45)">45min</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-tool">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Lista de Tarefas</h3>
+                    <div class="todo-list">
+                        <div class="todo-input">
+                            <input type="text" id="todo-input" placeholder="Nova tarefa...">
+                            <button onclick="addTodo()"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <ul id="todos"></ul>
+                    </div>
+                </div>
+                <div class="quick-tool">
+                    <i class="fas fa-sticky-note"></i>
+                    <h3>Notas Rápidas</h3>
+                    <div class="quick-notes">
+                        <textarea id="quick-note" placeholder="Escreva as suas notas aqui..."></textarea>
+                        <div class="note-controls">
+                            <button onclick="saveNote()"><i class="fas fa-save"></i> Guardar</button>
+                            <button onclick="clearNote()"><i class="fas fa-trash"></i> Limpar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="section">
+            <h2>Blog e Perguntas</h2>
+            <div class="blog-container">
+                <div class="post-form login-required">
+                    <h3>Faça uma Pergunta</h3>
+                    <textarea placeholder="Escreva a sua pergunta aqui..." disabled></textarea>
+                    <div class="post-controls">
+                        <button class="tag-button" onclick="addTag('Matemática')">Matemática</button>
+                        <button class="tag-button" onclick="addTag('Português')">Português</button>
+                        <button class="tag-button" onclick="addTag('Ciências')">Ciências</button>
+                        <button disabled>Publicar</button>
+                    </div>
+                    <p class="login-message">Inicie sessão para fazer perguntas</p>
+                </div>
+                <div class="posts-filter">
+                    <input type="text" placeholder="Pesquisar posts...">
+                    <select>
+                        <option value="recent">Mais Recentes</option>
+                        <option value="popular">Mais Populares</option>
+                        <option value="unanswered">Sem Resposta</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section id="conversoes" class="section">
+            <h2>Conversões</h2>
+            <div class="conversor-container">
+                <select id="tipo-conversao" onchange="atualizarUnidades()">
+                    <option value="temperatura">Temperatura</option>
+                    <option value="comprimento">Comprimento</option>
+                    <option value="peso">Peso</option>
+                    <option value="velocidade">Velocidade</option>
+                    <option value="area">Área</option>
+                    <option value="volume">Volume</option>
+                </select>
+                <div class="conversor-inputs">
+                    <div class="input-group">
+                        <input type="number" id="valor-entrada" placeholder="Valor" step="any">
+                        <select id="unidade-entrada"></select>
+                    </div>
+                    <div class="arrow">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="input-group">
+                        <select id="unidade-saida"></select>
+                    </div>
+                    <button onclick="converter()" class="convert-btn">
+                        <i class="fas fa-calculator"></i> Converter
+                    </button>
+                </div>
+                <div id="resultado" class="resultado"></div>
+                <div class="conversion-history">
+                    <h4><i class="fas fa-history"></i> Histórico de Conversões</h4>
+                    <ul id="history-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="max" class="section">
+            <h2>Max IA - O seu Assistente</h2>
+            <div class="chat-container login-required">
+                <div class="chat-sidebar">
+                    <h3>Tópicos Populares</h3>
+                    <ul class="chat-topics">
+                        <li onclick="selectTopic('matematica')">Matemática</li>
+                        <li onclick="selectTopic('portugues')">Português</li>
+                        <li onclick="selectTopic('ciencias')">Ciências</li>
+                        <li onclick="selectTopic('historia')">História</li>
+                        <li onclick="selectTopic('geografia')">Geografia</li>
+                    </ul>
+                    <div class="chat-settings">
+                        <label>
+                            <input type="checkbox" id="voice-input"> Entrada por Voz
+                        </label>
+                        <label>
+                            <input type="checkbox" id="auto-read"> Leitura Automática
+                        </label>
+                    </div>
+                </div>
+                <div class="chat-main">
+                    <div class="chat-messages">
+                        <div class="message bot">
+                            <div class="message-content">
+                                <p>Olá! Sou o Max, o seu assistente de estudos. Inicie sessão para conversar comigo!</p>
+                                <ul class="suggestions">
+                                    <li>Tirar dúvidas sobre matérias</li>
+                                    <li>Ajudar com exercícios</li>
+                                    <li>Explicar conceitos</li>
+                                    <li>Dar dicas de estudo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <button id="voice-btn" disabled><i class="fas fa-microphone"></i></button>
+                        <textarea placeholder="Inicie sessão para conversar com o Max..." disabled></textarea>
+                        <button onclick="enviarMensagem()" disabled><i class="fas fa-paper-plane"></i></button>
+                        <p class="login-message">Inicie sessão para utilizar o Max IA</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ferramentas" class="section">
+            <h2>Ferramentas</h2>
+            <div class="tools-container">
+                <div class="tool-card">
+                    <i class="fas fa-file-word"></i>
+                    <h3>Editor de Texto Online</h3>
+                    <p>Similar ao Word, para criar e editar documentos</p>
+                    <div class="tool-features">
+                        <ul>
+                            <li>Formatação avançada</li>
+                            <li>Colaboração em tempo real</li>
+                            <li>Cópia de segurança automática</li>
+                            <li>Corretor ortográfico</li>
+                            <li>Exportação em vários formatos</li>
+                        </ul>
+                    </div>
+                    <a href="https://www.google.com/docs/about/" target="_blank" class="tool-button">
+                        <i class="fas fa-external-link-alt"></i> Abrir Google Docs
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                    <i class="fas fa-file-powerpoint"></i>
+                    <h3>Apresentações Online</h3>
+                    <p>Similar ao PowerPoint, para criar apresentações</p>
+                    <div class="tool-features">
+                        <ul>
+                            <li>Temas profissionais</li>
+                            <li>Animações e transições</li>
+                            <li>Modo de apresentação</li>
+                            <li>Biblioteca de ícones</li>
+                            <li>Integração de mídia</li>
+                        </ul>
+                    </div>
+                    <a href="https://www.google.com/slides/about/" target="_blank" class="tool-button">
+                        <i class="fas fa-external-link-alt"></i> Abrir Google Slides
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                    <i class="fas fa-file-excel"></i>
+                    <h3>Folhas de Cálculo Online</h3>
+                    <p>Similar ao Excel, para criar folhas de cálculo</p>
+                    <div class="tool-features">
+                        <ul>
+                            <li>Fórmulas avançadas</li>
+                            <li>Gráficos dinâmicos</li>
+                            <li>Análise de dados</li>
+                            <li>Filtros e ordenação</li>
+                            <li>Tabelas dinâmicas</li>
+                        </ul>
+                    </div>
+                    <a href="https://www.google.com/sheets/about/" target="_blank" class="tool-button">
+                        <i class="fas fa-external-link-alt"></i> Abrir Google Sheets
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                    <i class="fas fa-edit"></i>
+                    <h3>Bloco de Notas</h3>
+                    <p>Editor de texto simples online</p>
+                    <div class="tool-features">
+                        <ul>
+                            <li>Interface minimalista</li>
+                            <li>Modo noturno</li>
+                            <li>Exportação em TXT</li>
+                            <li>Organização por pastas</li>
+                            <li>Pesquisa rápida</li>
+                        </ul>
+                    </div>
+                    <a href="https://notepad.js.org/" target="_blank" class="tool-button">
+                        <i class="fas fa-external-link-alt"></i> Abrir Notepad Online
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="recursos" class="section">
+            <h2>Recursos Educacionais</h2>
+            <div class="resources-container">
+                <div class="resource-category">
+                    <h3><i class="fas fa-square-root-alt"></i> Matemática</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <img src="https://www.khanacademy.org/images/khan-logo-dark-background.svg" alt="Khan Academy">
+                            <h4>Khan Academy</h4>
+                            <p>Vídeo-aulas e exercícios interativos de matemática, desde o básico até cálculo avançado.</p>
+                            <div class="resource-tags">
+                                <span>Gratuito</span>
+                                <span>Português</span>
+                                <span>Certificado</span>
+                            </div>
+                            <a href="https://pt.khanacademy.org/math" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                        <div class="resource-card">
+                            <img src="https://www.wolframalpha.com/images/spikey.png" alt="Wolfram Alpha">
+                            <h4>Wolfram Alpha</h4>
+                            <p>Ferramenta computacional que resolve problemas matemáticos passo a passo.</p>
+                            <div class="resource-tags">
+                                <span>Parcialmente Gratuito</span>
+                                <span>Inglês</span>
+                                <span>Avançado</span>
+                            </div>
+                            <a href="https://www.wolframalpha.com/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                        <div class="resource-card">
+                            <img src="https://www.geogebra.org/assets/logo.png" alt="GeoGebra">
+                            <h4>GeoGebra</h4>
+                            <p>Software de matemática dinâmica para geometria, álgebra e cálculo.</p>
+                            <div class="resource-tags">
+                                <span>Gratuito</span>
+                                <span>Português</span>
+                                <span>Interativo</span>
+                            </div>
+                            <a href="https://www.geogebra.org/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-category">
+                    <h3><i class="fas fa-code"></i> Programação</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <img src="https://www.codecademy.com/webpack/logo.svg" alt="Codecademy">
+                            <h4>Codecademy</h4>
+                            <p>Cursos interativos de programação com prática em tempo real.</p>
+                            <div class="resource-tags">
+                                <span>Parcialmente Gratuito</span>
+                                <span>Inglês</span>
+                                <span>Certificado</span>
+                            </div>
+                            <a href="https://www.codecademy.com/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                        <div class="resource-card">
+                            <img src="https://www.w3schools.com/images/w3schools_logo.png" alt="W3Schools">
+                            <h4>W3Schools</h4>
+                            <p>Tutoriais e referências completas para desenvolvimento web.</p>
+                            <div class="resource-tags">
+                                <span>Gratuito</span>
+                                <span>Inglês</span>
+                                <span>Referência</span>
+                            </div>
+                            <a href="https://www.w3schools.com/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                        <div class="resource-card">
+                            <img src="https://www.freecodecamp.org/news/content/images/2019/11/fcc_primary_large_24X210.svg" alt="freeCodeCamp">
+                            <h4>freeCodeCamp</h4>
+                            <p>Certificações gratuitas em desenvolvimento web com projetos práticos.</p>
+                            <div class="resource-tags">
+                                <span>Gratuito</span>
+                                <span>Inglês</span>
+                                <span>Projetos</span>
+                            </div>
+                            <a href="https://www.freecodecamp.org/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-category">
+                    <h3><i class="fas fa-language"></i> Idiomas</h3>
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <img src="https://d35aaqx5ub95lt.cloudfront.net/images/duolingo-logo.svg" alt="Duolingo">
+                            <h4>Duolingo</h4>
+                            <p>Aprenda idiomas de forma divertida, com lições curtas e interativas.</p>
+                            <div class="resource-tags">
+                                <span>Gratuito</span>
+                                <span>Português</span>
+                                <span>Gamificado</span>
+                            </div>
+                            <a href="https://www.duolingo.com/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                        <div class="resource-card">
+                            <img src="https://www.babbel.com/static/images/header-logo.svg" alt="Babbel">
+                            <h4>Babbel</h4>
+                            <p>Método científico de aprendizagem de idiomas focado em conversação.</p>
+                            <div class="resource-tags">
+                                <span>Pago</span>
+                                <span>Português</span>
+                                <span>Profissional</span>
+                            </div>
+                            <a href="https://www.babbel.com/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                        <div class="resource-card">
+                            <img src="https://d1btvuu4dwu627.cloudfront.net/images/logo-v2.svg" alt="Busuu">
+                            <h4>Busuu</h4>
+                            <p>Aprenda com falantes nativos e receba feedback personalizado.</p>
+                            <div class="resource-tags">
+                                <span>Parcialmente Gratuito</span>
+                                <span>Português</span>
+                                <span>Social</span>
+                            </div>
+                            <a href="https://www.busuu.com/" target="_blank" class="resource-link">Aceder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="apresentacoes" class="section">
+            <h2>Apresentações</h2>
+            <div class="presentations-container login-required">
+                <div class="presentations-header">
+                    <div class="presentations-search">
+                        <input type="text" placeholder="Pesquisar apresentações...">
+                        <select>
+                            <option value="all">Todas as Disciplinas</option>
+                            <option value="math">Matemática</option>
+                            <option value="portuguese">Português</option>
+                            <option value="science">Ciências</option>
+                            <option value="history">História</option>
+                        </select>
+                    </div>
+                    <div class="presentation-sort">
+                        <label>Ordenar por:</label>
+                        <select>
+                            <option value="recent">Mais Recentes</option>
+                            <option value="popular">Mais Populares</option>
+                            <option value="name">Nome</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="upload-area">
+                    <h3>Partilhe a sua Apresentação</h3>
+                    <div class="upload-dropzone" id="upload-dropzone">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Arraste e solte ficheiros aqui ou</p>
+                        <input type="file" id="presentation-upload" accept=".pdf,.ppt,.pptx" disabled>
+                        <button class="upload-btn" disabled>Selecionar Ficheiros</button>
+                    </div>
+                    <div class="upload-preview" id="upload-preview"></div>
+                    <button onclick="uploadPresentation()" disabled>Enviar</button>
+                    <p class="login-message">Inicie sessão para partilhar apresentações</p>
+                </div>
+                <div class="presentations-grid" id="presentations-grid"></div>
+                <div class="presentations-pagination">
+                    <button><i class="fas fa-chevron-left"></i></button>
+                    <span>Página 1 de 1</span>
+                    <button><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="creditos" class="section">
+            <h2>Créditos</h2>
+            <div class="creditos-container">
+                <div class="profile-header">
+                    <img src="francisco.jpg" alt="Francisco Lázaro" class="profile-pic">
+                    <div class="profile-info">
+                        <h3>Francisco Lázaro</h3>
+                        <p class="profile-title">Desenvolvedor & Estudante</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <i class="fas fa-code"></i>
+                                <span>Programador</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-music"></i>
+                                <span>Pianista</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Eng. Informática</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bio">
+                    <p>Estudante apaixonado por tecnologia e música, Francisco Lázaro é um jovem programador e pianista que procura unir as suas paixões para criar soluções inovadoras na área educacional.</p>
+                    <p>Atualmente estuda Engenharia Informática, desenvolveu o EduCulturas25 com o objetivo de ajudar outros estudantes na sua jornada de aprendizagem.</p>
+                    <p>Além de programar, Francisco dedica o seu tempo livre ao piano, demonstrando que é possível combinar arte e tecnologia de uma forma harmoniosa.</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/TopsWEREProductions" class="social-button" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="/error.html" class="social-button"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="/error.html" class="social-button"><i class="fab fa-instagram"></i> Instagram</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sobre</h4>
+                <p>EduCulturas25 é uma plataforma educacional dedicada a ajudar estudantes a alcançarem o seu potencial máximo. Foi uma grande Start-Up desenvolvida por Francisco Lázaro. </p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#ferramentas">Ferramentas</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#apresentacoes">Apresentações</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> franciscodellazaro.eec@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 EduCulturas25 - Criado por Francisco Lázaro</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script

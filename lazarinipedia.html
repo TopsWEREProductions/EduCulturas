@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LazariniPédia - A Enciclopédia Colaborativa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .warning-banner {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ffeeba;
+        }
+
+        header {
+            background: #1e3c72;
+            color: white;
+            padding: 1rem;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 0.5rem 1rem;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-editor {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .article-editor h2 {
+            margin-bottom: 1rem;
+        }
+
+        .editor-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .editor-controls button {
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .editor-content {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 300px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .article-preview {
+            margin-bottom: 1rem;
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .article-actions button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .article-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        <i class="fas fa-exclamation-triangle"></i>
+        Aviso: As informações nesta plataforma são contribuições dos utilizadores e podem não ser totalmente precisas. Verifique sempre as fontes oficiais.
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">LazariniPédia</div>
+            <a href="index.html" style="color: white; text-decoration: none;">Voltar ao EduCulturas25</a>
+        </nav>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Pesquisar artigos...">
+        <button><i class="fas fa-search"></i> Pesquisar</button>
+    </div>
+
+    <main>
+        <section class="article-editor">
+            <h2>Criar/Editar Artigo</h2>
+            <div class="editor-controls">
+                <button onclick="formatText('bold')"><i class="fas fa-bold"></i></button>
+                <button onclick="formatText('italic')"><i class="fas fa-italic"></i></button>
+                <button onclick="formatText('underline')"><i class="fas fa-underline"></i></button>
+                <button onclick="addLink()"><i class="fas fa-link"></i></button>
+                <button onclick="addImage()"><i class="fas fa-image"></i></button>
+            </div>
+            <div class="editor-content" contenteditable="true">
+                Comece a escrever seu artigo aqui...
+            </div>
+            <button class="edit-btn">Publicar Artigo</button>
+        </section>
+
+        <section class="article-list">
+            <div class="article-card">
+                <h3>História do EduCulturas25</h3>
+                <div class="article-meta">
+                    <span>Criado por: Francisco Lázaro</span> · 
+                    <span>Última edição: 10/03/2024</span>
+                </div>
+                <div class="article-preview">
+                    O EduCulturas25 é uma plataforma educacional desenvolvida com o objetivo de...
+                </div>
+                <div class="article-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Apagar</button>
+                </div>
+            </div>
+
+            <div class="article-card">
+                <h3>Guia de Matemática Avançada</h3>
+                <div class="article-meta">
+                    <span>Criado por: Ana Silva</span> · 
+                    <span>Última edição: 09/03/2024</span>
+                </div>
+                <div class="article-preview">
+                    Este guia abrange os principais conceitos de cálculo diferencial e integral...
+                </div>
+                <div class="article-actions">
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Apagar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function formatText(command) {
+            document.execCommand(command, false, null);
+        }
+
+        function addLink() {
+            const url = prompt('Insira o URL:');
+            if (url) {
+                document.execCommand('createLink', false, url);
+            }
+        }
+
+        function addImage() {
+            const url = prompt('Insira o URL da imagem:');
+            if (url) {
+                document.execCommand('insertImage', false, url);
+            }
+        }
+    </script>
+</body>
+</html>

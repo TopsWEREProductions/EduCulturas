@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+    <!-- Fundo circular -->
+    <circle cx="100" cy="100" r="98" fill="#4a90e2" />
+    
+    <!-- Silhueta da pessoa -->
+    <g fill="#ffffff">
+        <!-- Cabeça -->
+        <circle cx="100" cy="70" r="35" />
+        
+        <!-- Corpo -->
+        <path d="M100 115 C 60 115, 40 155, 40 200 L 160 200 C 160 155, 140 115, 100 115" />
+    </g>
+    
+    <!-- Detalhes -->
+    <g fill="none" stroke="#2ecc71" stroke-width="3">
+        <!-- Símbolos de música -->
+        <path d="M60 160 C 65 150, 70 145, 75 150 M 70 155 L 70 170" />
+        
+        <!-- Símbolos de código -->
+        <path d="M120 155 L 130 165 L 120 175 M 140 155 L 130 165 L 140 175" />
+    </g>
+</svg>
